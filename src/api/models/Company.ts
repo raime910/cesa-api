@@ -1,21 +1,19 @@
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Pet } from './Pet';
-
 @Entity()
-export class User {
+export class Company {
 
     @PrimaryGeneratedColumn('uuid')
     public id: string;
 
     @IsNotEmpty()
-    @Column({ name: 'first_name' })
-    public firstName: string;
+    @Column({ name: 'name' })
+    public name: string;
 
     @IsNotEmpty()
-    @Column({ name: 'last_name' })
-    public lastName: string;
+    @Column({ name: 'description' })
+    public description: string;
 
     @IsNotEmpty()
     @Column()
@@ -23,13 +21,10 @@ export class User {
 
     @IsNotEmpty()
     @Column()
-    public alias: string;
-
-    @OneToMany(type => Pet, pet => pet.user)
-    public pets: Pet[];
+    public website: string;
 
     public toString(): string {
-        return `${this.firstName} ${this.lastName} (${this.email})`;
+        return `${this.name} (${this.email})`;
     }
 
 }
