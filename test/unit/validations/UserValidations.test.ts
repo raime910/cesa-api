@@ -37,6 +37,7 @@ describe('UserValidations', () => {
         user.lastName = 'TestName';
         user.alias = 'TestAlias';
         user.email = 'test@test.com';
+        user.companyId = '12345';
         const errors = await validate(user);
         expect(errors.length).toEqual(0);
         done();

@@ -37,7 +37,7 @@ export class PetService {
     }
 
     public async create(pet: Pet): Promise<Pet> {
-        this.log.info('Create a new pet => ', pet.toString());
+        this.log.info('Create a new pet => ', pet.name);
         const newPet = await this.petRepository.save(pet);
         this.eventDispatcher.dispatch(events.pet.created, newPet);
         return newPet;

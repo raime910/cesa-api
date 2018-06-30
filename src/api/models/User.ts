@@ -1,6 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+import { Company } from './Company';
 import { Pet } from './Pet';
 
 @Entity()
@@ -10,11 +11,11 @@ export class User {
     public id: string;
 
     @IsNotEmpty()
-    @Column({ name: 'first_name' })
+    @Column()
     public firstName: string;
 
     @IsNotEmpty()
-    @Column({ name: 'last_name' })
+    @Column()
     public lastName: string;
 
     @IsNotEmpty()
@@ -27,6 +28,14 @@ export class User {
 
     @OneToMany(type => Pet, pet => pet.user)
     public pets: Pet[];
+
+    @IsNotEmpty()
+    @Column()
+    public companyId: string;
+
+    @ManyToOne(type => Company, company => company.employees)
+    @JoinColumn({ name: 'companyId' })
+    public company: Company;
 
     public toString(): string {
         return `${this.firstName} ${this.lastName} (${this.email})`;

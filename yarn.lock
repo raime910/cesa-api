@@ -5330,17 +5330,17 @@ type-is@~1.6.15, type-is@~1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.18"
 
-typedi@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.7.2.tgz#fcd66209fc57e8f62373a7fa0a3f34b24e9b03ed"
+typedi@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.7.3.tgz#872fb8d608ed6076e95c1f8cbd2bb33b7d089f0f"
 
 typeorm-typedi-extensions@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/typeorm-typedi-extensions/-/typeorm-typedi-extensions-0.2.1.tgz#11d47528cb2986f57f32ad70c50b00690c7d3ba2"
 
-typeorm@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.1.tgz#a4ea2f5eaca5c56f027e21c54190777c44c7762a"
+typeorm@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.7.tgz#4bbbace80dc91b1303be13f42d44ebf01d1b2558"
   dependencies:
     app-root-path "^2.0.1"
     buffer "^5.1.0"

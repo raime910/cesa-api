@@ -17,14 +17,11 @@ export class Pet {
     @Column()
     public age: number;
 
-    @Column({
-        name: 'user_id',
-        nullable: true,
-    })
-    public userId: number;
+    @Column({ nullable: true })
+    public userId: string;
 
     @ManyToOne(type => User, user => user.pets)
-    @JoinColumn({ name: 'user_id' })
+    @JoinColumn({ name: 'userId' })
     public user: User;
 
     public toString(): string {

@@ -31,7 +31,8 @@ module.exports = {
             script: series(
                 'yarn install',
                 'nps db.drop',
-                'nps db.migrate',
+                'nps db.migration',
+                'nps db.sync',
                 'nps db.seed'
             ),
             description: 'Setup`s the development environment(yarn & database)'
@@ -120,9 +121,17 @@ module.exports = {
          * Database scripts
          */
         db: {
-            migrate: {
+            migration: {
                 script: series(
-                    'nps banner.migrate',
+                    'nps banner.migration',
+                    'nps config',
+                    runFast('./node_modules/typeorm/cli.js migration:generate -n initialize')
+                ),
+                description: 'Migrates the database to newest version available'
+            },
+            sync: {
+                script: series(
+                    'nps banner.sync',
                     'nps config',
                     runFast('./node_modules/typeorm/cli.js migration:run')
                 ),
@@ -245,7 +254,8 @@ module.exports = {
             testUnit: banner('test.unit'),
             testIntegration: banner('test.integration'),
             testE2E: banner('test.e2e'),
-            migrate: banner('migrate'),
+            sync: banner('sync'),
+            migration: banner('migration'),
             seed: banner('seed'),
             revert: banner('revert'),
             clean: banner('clean')
