@@ -71,7 +71,7 @@ export const env = {
         route: getOsEnv('AUTH_ROUTE'),
     },
     db: {
-        type: getOsEnv('TYPEORM_CONNECTION'),
+        type: getOsEnv('TYPEORM_CONNECTION_BP'),
         host: getOsEnv('TYPEORM_HOST'),
         port: toNumber(getOsEnv('TYPEORM_PORT')),
         username: getOsEnv('TYPEORM_USERNAME'),

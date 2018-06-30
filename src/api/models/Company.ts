@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Company {
@@ -22,6 +22,10 @@ export class Company {
     @IsNotEmpty()
     @Column()
     public website: string;
+
+    @IsNotEmpty()
+    @Column()
+    public alias: string;
 
     public toString(): string {
         return `${this.name} (${this.email})`;
