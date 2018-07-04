@@ -54,14 +54,14 @@ export class League {
      * These are the league categories
      */
     @ManyToMany(() => LeagueCategory)
-    // @JoinTable({ name: 'league_leagueCategory' })
+    @JoinTable({ name: '_league_leagueCategory' })
     public categories: LeagueCategory[];
 
     /**
      * This says which games are available for this league.
      */
     @ManyToMany(() => Game)
-    // @JoinTable({ name: 'game_league' })
+    @JoinTable({ name: '_league_game' })
     public availableGames: Game[];
 
 }

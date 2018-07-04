@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
+import { Entity, ManyToMany, PrimaryColumn } from 'typeorm';
 
 import { Division } from './Division';
 import { Organization } from './Organization';
@@ -7,28 +7,28 @@ import { User } from './User';
 /**
  * This says which employee within the company is participating in the league division
  */
-@Entity({ name: 'division_roster' })
+@Entity({ name: 'divisionRoster' })
 export class DivisionRoster {
 
     /**
      * The current company the user is during the roster build.
      */
-    @PrimaryColumn({ name: 'organization_id' })
+    @PrimaryColumn()
     public organizationId: string;
 
-    @PrimaryColumn({ name: 'user_id' })
-    public userId: string;
+    @PrimaryColumn()
+    public playerId: string;
 
-    @PrimaryColumn({ name: 'division_id' })
+    @PrimaryColumn()
     public divisionId: string;
 
-    @ManyToMany(() => Organization)
-    public organizations: Organization[];
+    @ManyToMany(() => Organization, organization => organization.divisionRosters)
+    public organization: Organization;
 
-    @ManyToMany(() => User)
-    public players: User[];
+    @ManyToMany(() => User, user => user.divisionRosters)
+    public player: User;
 
-    @OneToMany(() => Division, division => division.rosters)
+    @ManyToMany(() => Division, division => division.divisionRosters)
     public division: Division;
 
 }

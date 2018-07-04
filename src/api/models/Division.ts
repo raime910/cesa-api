@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import {
-    Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn
+    Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn
 } from 'typeorm';
 
 import { DivisionRoster } from './DivisionRoster';
@@ -30,9 +30,10 @@ export class Division {
 
     @IsNotEmpty()
     @ManyToMany(() => Organization)
+    @JoinTable({ name: '_organization_division' })
     public organizations: Organization[];
 
-    @OneToMany(() => DivisionRoster, divisionRoster => divisionRoster.division)
-    public rosters: DivisionRoster[];
+    @ManyToMany(() => DivisionRoster)
+    public divisionRosters: DivisionRoster[];
 
 }

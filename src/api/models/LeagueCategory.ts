@@ -8,7 +8,7 @@ import { League } from './League';
 /**
  * This serves as a link between the league and the game that is being played.
  */
-@Entity({ name: 'league_category' })
+@Entity({ name: 'leagueCategory' })
 export class LeagueCategory {
 
     @PrimaryGeneratedColumn('uuid')
