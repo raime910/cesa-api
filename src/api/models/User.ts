@@ -1,10 +1,10 @@
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Company } from './Company';
+import { Organization } from './Organization';
 import { Pet } from './Pet';
 
-@Entity()
+@Entity({ name: 'user' })
 export class User {
 
     @PrimaryGeneratedColumn('uuid')
@@ -29,13 +29,12 @@ export class User {
     @OneToMany(type => Pet, pet => pet.user)
     public pets: Pet[];
 
-    @IsNotEmpty()
-    @Column()
-    public companyId: string;
+    @Column({ nullable: true })
+    public organizationId: string;
 
-    @ManyToOne(type => Company, company => company.employees)
-    @JoinColumn({ name: 'companyId' })
-    public company: Company;
+    @ManyToOne(type => Organization, organization => organization.employees)
+    @JoinColumn({ name: 'organizationId' })
+    public company: Organization;
 
     public toString(): string {
         return `${this.firstName} ${this.lastName} (${this.email})`;

@@ -1,11 +1,11 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { LeagueDivision } from './LeagueDivision';
+import { DivisionRoster } from './DivisionRoster';
 import { User } from './User';
 
-@Entity()
-export class Company {
+@Entity({ name: 'organization' })
+export class Organization {
 
     @PrimaryGeneratedColumn('uuid')
     public id: string;
@@ -30,11 +30,10 @@ export class Company {
     @Column()
     public alias: string;
 
-    @OneToMany(type => User, user => user.company)
+    @OneToMany(() => User, user => user.company)
     public employees: User[];
 
-    @ManyToMany(type => LeagueDivision)
-    @JoinTable({ name: 'companyLeagueDivisions' })
-    public leagueDivisions: LeagueDivision[];
+    @ManyToMany(() => DivisionRoster)
+    public divisionRosters: DivisionRoster[];
 
 }

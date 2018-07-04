@@ -32,6 +32,7 @@ export class CreateBruce implements Seed {
         user.firstName = 'Bruce';
         user.lastName = 'Wayne';
         user.email = 'bruce.wayne@wayne-enterprises.com';
+        user.alias = 'Batman';
         return await em.save(user);
     }
 

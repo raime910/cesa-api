@@ -30,6 +30,7 @@ module.exports = {
         setup: {
             script: series(
                 'yarn install',
+                'nps clean.migration',
                 'nps db.drop',
                 'nps db.migration',
                 'nps db.sync',
@@ -89,7 +90,11 @@ module.exports = {
             dist: {
                 script: rimraf('./dist'),
                 hiddenFromHelp: true
-            }
+            },
+            migration: {
+                script: rimraf('./src/database/migrations'),
+                hiddenFromHelp: true
+            },
         },
         /**
          * Copies static files to the build folder
@@ -121,11 +126,17 @@ module.exports = {
          * Database scripts
          */
         db: {
+            update: {
+                script: series(
+                    'nps db.migration',
+                    'nps db.sync'
+                )
+            },
             migration: {
                 script: series(
                     'nps banner.migration',
                     'nps config',
-                    runFast('./node_modules/typeorm/cli.js migration:generate -n initialize')
+                    runFast('./node_modules/typeorm/cli.js migration:generate -n migration')
                 ),
                 description: 'Migrates the database to newest version available'
             },

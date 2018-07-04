@@ -3,7 +3,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Game } from './Game';
 
-@Entity()
+@Entity({ name: 'game_category' })
 export class GameCategory {
 
     @PrimaryGeneratedColumn('uuid')
@@ -14,7 +14,7 @@ export class GameCategory {
     public name: string;
 
     @IsNotEmpty()
-    @Column()
+    @Column({ name: 'shortName' })
     public shortName: string;
 
     @IsNotEmpty()

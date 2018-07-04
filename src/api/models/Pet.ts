@@ -3,7 +3,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 
 import { User } from './User';
 
-@Entity()
+@Entity({ name: 'pet' })
 export class Pet {
 
     @PrimaryGeneratedColumn('uuid')
@@ -17,11 +17,14 @@ export class Pet {
     @Column()
     public age: number;
 
-    @Column({ nullable: true })
+    @Column({
+        name: 'user_id',
+        nullable: true,
+    })
     public userId: string;
 
     @ManyToOne(type => User, user => user.pets)
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'user_id' })
     public user: User;
 
     public toString(): string {
