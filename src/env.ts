@@ -34,7 +34,7 @@ export const env = {
             migrationsDir: getOsEnv('TYPEORM_MIGRATIONS_DIR') || path.relative(path.join(process.cwd()), path.join(__dirname, 'database/migrations')),
             entities: (
                 getOsEnvArray('TYPEORM_ENTITIES') ||
-                [path.relative(path.join(process.cwd()), path.join(__dirname, 'api/models/**/*{.js,.ts}'))]
+                [path.relative(path.join(process.cwd()), path.join(__dirname, 'api/models/**/*{.js,.ts}')).replace('\\\\', '/')]
             ) as string[],
             subscribers: (
                 getOsEnvArray('TYPEORM_SUBSCRIBERS') ||

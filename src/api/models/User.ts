@@ -1,10 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
-import {
-    Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { DivisionRoster } from './DivisionRoster';
-import { Organization } from './Organization';
+import { LeagueStaff } from './LeagueStaff';
 import { Pet } from './Pet';
 
 @Entity({ name: 'user' })
@@ -29,18 +26,14 @@ export class User {
     @Column()
     public alias: string;
 
-    @OneToMany(type => Pet, pet => pet.user)
+    @OneToMany(() => Pet, pet => pet.user)
     public pets: Pet[];
 
     @Column({ nullable: true })
     public organizationId: string;
 
-    @ManyToOne(type => Organization, organization => organization.employees)
-    @JoinColumn({ name: 'organizationId' })
-    public company: Organization;
-
-    @ManyToMany(() => DivisionRoster, divisionRoster => divisionRoster.player)
-    public divisionRosters: DivisionRoster[];
+    @OneToMany(type => LeagueStaff, leagueStaff => leagueStaff.user)
+    public staffs: LeagueStaff[];
 
     public toString(): string {
         return `${this.firstName} ${this.lastName} (${this.email})`;

@@ -15,6 +15,8 @@ const content = {
     database: env.db.database,
     entities: env.app.dirs.entities,
     migrations: env.app.dirs.migrations,
+    synchronize: env.db.synchronize,
+    logging: env.db.logging,
     cli: {
         migrationsDir: env.app.dirs.migrationsDir,
     },

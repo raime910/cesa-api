@@ -1,67 +1,21 @@
-import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Game } from './Game';
-import { LeagueCategory } from './LeagueCategory';
+import { LeagueGame } from './LeagueGame';
+import { LeagueStaff } from './LeagueStaff';
 
-@Entity({ name: 'league' })
-export class League {
+@Entity()
+export class League extends BaseEntity {
 
-    @PrimaryGeneratedColumn('uuid')
-    public id: string;
+    @PrimaryGeneratedColumn()
+    public id: number;
 
-    @IsNotEmpty()
     @Column()
     public name: string;
 
-    @IsNotEmpty()
-    @Column()
-    public description: string;
+    @OneToMany(type => LeagueStaff, leagueStaff => leagueStaff.league)
+    public staffs: LeagueStaff[];
 
-    @IsNotEmpty()
-    @Column()
-    public email: string;
-
-    @IsNotEmpty()
-    @Column()
-    public website: string;
-
-    @IsNotEmpty()
-    @Column()
-    public twitter: string;
-
-    @IsNotEmpty()
-    @Column()
-    public twitch: string;
-
-    @IsNotEmpty()
-    @Column()
-    public facebook: string;
-
-    @IsNotEmpty()
-    @Column()
-    public youtube: string;
-
-    @IsNotEmpty()
-    @Column()
-    public discord: string;
-
-    @IsNotEmpty()
-    @Column()
-    public googlePlus: string;
-
-    /**
-     * These are the league categories
-     */
-    @ManyToMany(() => LeagueCategory)
-    @JoinTable({ name: '_league_leagueCategory' })
-    public categories: LeagueCategory[];
-
-    /**
-     * This says which games are available for this league.
-     */
-    @ManyToMany(() => Game)
-    @JoinTable({ name: '_league_game' })
-    public availableGames: Game[];
+    @ManyToOne(type => LeagueGame, leagueGame => leagueGame.league)
+    public leagueGames: LeagueGame[];
 
 }

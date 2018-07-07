@@ -1,32 +1,16 @@
-import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-import { League } from './League';
-import { LeagueCategory } from './LeagueCategory';
+import { LeagueGame } from './LeagueGame';
 
-@Entity({ name: 'game' })
-export class Game {
+@Entity()
+export class Game extends BaseEntity {
 
-    @PrimaryGeneratedColumn('uuid')
-    public id: string;
+    @PrimaryGeneratedColumn()
+    public id: number;
 
-    @IsNotEmpty()
     @Column()
     public name: string;
 
-    @IsNotEmpty()
-    @Column()
-    public description: string;
-
-    @ManyToMany(() => League)
-    @JoinTable({ name: '_league_game' })
-    public leagues: League[];
-
-    @OneToMany(() => LeagueCategory, leagueCategory => leagueCategory.game)
-    public categories: LeagueCategory[];
-
-    public toString(): string {
-        return `${this.name}`;
-    }
-
+    @ManyToOne(type => LeagueGame, leagueGame => leagueGame.league)
+    public leagueGames: LeagueGame[];
 }
