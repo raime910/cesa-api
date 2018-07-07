@@ -1,3 +1,4 @@
+import { IsNotEmpty } from 'class-validator';
 import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { LeagueGame } from './LeagueGame';
@@ -9,8 +10,17 @@ export class League extends BaseEntity {
     @PrimaryGeneratedColumn()
     public id: number;
 
+    @IsNotEmpty()
     @Column()
     public name: string;
+
+    @IsNotEmpty()
+    @Column()
+    public rules: string;
+
+    @IsNotEmpty()
+    @Column()
+    public prize: string;
 
     @OneToMany(type => LeagueStaff, leagueStaff => leagueStaff.league)
     public staffs: LeagueStaff[];

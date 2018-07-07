@@ -1,14 +1,15 @@
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+import { EntryRoster } from './EntryRoster';
 import { LeagueStaff } from './LeagueStaff';
 import { Pet } from './Pet';
 
 @Entity({ name: 'user' })
 export class User {
 
-    @PrimaryGeneratedColumn('uuid')
-    public id: string;
+    @PrimaryGeneratedColumn()
+    public id: number;
 
     @IsNotEmpty()
     @Column()
@@ -34,6 +35,9 @@ export class User {
 
     @OneToMany(type => LeagueStaff, leagueStaff => leagueStaff.user)
     public staffs: LeagueStaff[];
+
+    @OneToMany(type => EntryRoster, entryRoster => entryRoster.user)
+    public entryRosters: EntryRoster[];
 
     public toString(): string {
         return `${this.firstName} ${this.lastName} (${this.email})`;

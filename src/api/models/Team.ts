@@ -4,11 +4,11 @@ import {
 } from 'typeorm';
 
 import { DivisionTeamEntry } from './DivisionTeamEntry';
-import { LeagueGame } from './LeagueGame';
-import { Team } from './Team';
+import { LeagueDivision } from './LeagueDivision';
+import { Organization } from './Organization';
 
 @Entity()
-export class LeagueDivision extends BaseEntity {
+export class Team extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     public id: number;
@@ -19,15 +19,15 @@ export class LeagueDivision extends BaseEntity {
 
     @IsNotEmpty()
     @Column()
-    public leagueGameId: number;
+    public organizationId: number;
 
-    @ManyToOne(type => LeagueGame, leagueGame => leagueGame.divisions)
-    @JoinColumn({ name: 'leagueGameId' })
-    public leagueGame: LeagueGame;
+    @ManyToOne(type => Organization, organization => organization.teams)
+    @JoinColumn({ name: 'organizationId' })
+    public organization: Organization;
 
-    @ManyToMany(type => Team, team => team.divisions)
+    @ManyToMany(type => LeagueDivision, leagueDivision => leagueDivision.teams)
     @JoinTable({ name: '_division_team' })
-    public teams: any;
+    public divisions: LeagueDivision[];
 
     @ManyToOne(type => DivisionTeamEntry, entry => entry.division)
     public entries: DivisionTeamEntry[];

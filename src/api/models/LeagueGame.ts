@@ -1,3 +1,4 @@
+import { IsNotEmpty } from 'class-validator';
 import {
     BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn
 } from 'typeorm';
@@ -12,9 +13,11 @@ export class LeagueGame extends BaseEntity {
     @PrimaryGeneratedColumn()
     public id: number;
 
+    @IsNotEmpty()
     @Column()
     public leagueId: number;
 
+    @IsNotEmpty()
     @Column()
     public gameId: number;
 

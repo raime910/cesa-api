@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 
-import { User } from '../../../src/api/models/User';
+import { User } from '../../api/models/User';
 import { Factory, Seed } from '../../lib/seed/types';
 
 export class CreateBruce implements Seed {

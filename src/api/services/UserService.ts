@@ -21,7 +21,7 @@ export class UserService {
         return this.userRepository.find({ relations: ['pets'] });
     }
 
-    public findOne(id: string): Promise<User | undefined> {
+    public findOne(id: number): Promise<User | undefined> {
         this.log.info('Find all users');
         return this.userRepository.findOne({ id });
     }
@@ -33,13 +33,13 @@ export class UserService {
         return newUser;
     }
 
-    public update(id: string, user: User): Promise<User> {
+    public update(id: number, user: User): Promise<User> {
         this.log.info('Update a user');
         user.id = id;
         return this.userRepository.save(user);
     }
 
-    public async delete(id: string): Promise<void> {
+    public async delete(id: number): Promise<void> {
         this.log.info('Delete a user');
         await this.userRepository.delete(id);
         return;

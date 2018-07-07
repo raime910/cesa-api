@@ -31,7 +31,7 @@ export class PetService {
         });
     }
 
-    public findOne(id: string): Promise<Pet | undefined> {
+    public findOne(id: number): Promise<Pet | undefined> {
         this.log.info('Find all pets');
         return this.petRepository.findOne({ id });
     }
@@ -43,13 +43,13 @@ export class PetService {
         return newPet;
     }
 
-    public update(id: string, pet: Pet): Promise<Pet> {
+    public update(id: number, pet: Pet): Promise<Pet> {
         this.log.info('Update a pet');
         pet.id = id;
         return this.petRepository.save(pet);
     }
 
-    public async delete(id: string): Promise<void> {
+    public async delete(id: number): Promise<void> {
         this.log.info('Delete a pet');
         await this.petRepository.delete(id);
         return;
