@@ -1,19 +1,19 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class migration1530939848585 implements MigrationInterface {
+export class migration1530972246227 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query("CREATE TABLE `game` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `leagueGamesId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
+        await queryRunner.query("CREATE TABLE `game` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `description` varchar(255) NOT NULL, `website` varchar(255) NOT NULL, `leagueGamesId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `organization` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `website` varchar(255) NOT NULL, `teamsId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `team` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `organizationId` int NOT NULL, `entriesId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `league_division` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `leagueGameId` int NOT NULL, `entriesId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `league_game` (`id` int NOT NULL AUTO_INCREMENT, `leagueId` int NOT NULL, `gameId` int NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
-        await queryRunner.query("CREATE TABLE `league` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `leagueGamesId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
+        await queryRunner.query("CREATE TABLE `league` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `rules` varchar(255) NOT NULL, `prize` varchar(255) NOT NULL, `leagueGamesId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `role` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
-        await queryRunner.query("CREATE TABLE `league_staff` (`leagueId` int NOT NULL, `roleId` int NOT NULL, `userId` varchar(255) NOT NULL, PRIMARY KEY (`leagueId`, `roleId`, `userId`)) ENGINE=InnoDB");
-        await queryRunner.query("CREATE TABLE `pet` (`id` varchar(255) NOT NULL, `name` varchar(255) NOT NULL, `age` int NOT NULL, `user_id` varchar(255) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
-        await queryRunner.query("CREATE TABLE `user` (`id` varchar(255) NOT NULL, `firstName` varchar(255) NOT NULL, `lastName` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `alias` varchar(255) NOT NULL, `organizationId` varchar(255) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
-        await queryRunner.query("CREATE TABLE `entry_roster` (`id` int NOT NULL AUTO_INCREMENT, `userId` varchar(255) NOT NULL, `entryId` int NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
+        await queryRunner.query("CREATE TABLE `league_staff` (`leagueId` int NOT NULL, `roleId` int NOT NULL, `userId` int NOT NULL, PRIMARY KEY (`leagueId`, `roleId`, `userId`)) ENGINE=InnoDB");
+        await queryRunner.query("CREATE TABLE `pet` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `age` int NOT NULL, `user_id` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
+        await queryRunner.query("CREATE TABLE `user` (`id` int NOT NULL AUTO_INCREMENT, `firstName` varchar(255) NOT NULL, `lastName` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `alias` varchar(255) NOT NULL, `organizationId` varchar(255) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
+        await queryRunner.query("CREATE TABLE `entry_roster` (`id` int NOT NULL AUTO_INCREMENT, `userId` int NOT NULL, `entryId` int NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `division_team_entry` (`id` int NOT NULL AUTO_INCREMENT, `divisionId` int NOT NULL, `teamId` int NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB");
         await queryRunner.query("CREATE TABLE `_division_team` (`teamId` int NOT NULL, `leagueDivisionId` int NOT NULL, PRIMARY KEY (`teamId`, `leagueDivisionId`)) ENGINE=InnoDB");
         await queryRunner.query("ALTER TABLE `game` ADD CONSTRAINT `FK_2fd9403dce443a9308a6827c6c1` FOREIGN KEY (`leagueGamesId`) REFERENCES `league_game`(`id`)");

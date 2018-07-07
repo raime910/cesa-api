@@ -22,7 +22,7 @@ export class UserService {
     }
 
     public findOne(id: number): Promise<User | undefined> {
-        this.log.info('Find all users');
+        this.log.info('Find one user');
         return this.userRepository.findOne({ id });
     }
 
@@ -34,13 +34,13 @@ export class UserService {
     }
 
     public update(id: number, user: User): Promise<User> {
-        this.log.info('Update a user');
+        this.log.info('Update a user => ' + id);
         user.id = id;
         return this.userRepository.save(user);
     }
 
     public async delete(id: number): Promise<void> {
-        this.log.info('Delete a user');
+        this.log.info('Delete a user => ' + id);
         await this.userRepository.delete(id);
         return;
     }
