@@ -1,4 +1,6 @@
-import { Authorized, Get, JsonController, OnUndefined, Param } from 'routing-controllers';
+import {
+    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put
+} from 'routing-controllers';
 
 import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { Organization } from '../models/Organization';
@@ -20,6 +22,21 @@ export class OrganizationController {
     @Get('/:id')
     @OnUndefined(RecordNotFoundError)
     public findOne(@Param('id') id: number): Promise<Organization | undefined> {
+        return this.organizationService.findOne(id);
+    }
 
+    @Post()
+    public create(@Body() organization: Organization): Promise<Organization> {
+        return this.organizationService.create(organization);
+    }
+
+    @Put('/:id')
+    public update(@Param('id') id: number, @Body() organization: Organization): Promise<Organization> {
+        return this.organizationService.update(id, organization);
+    }
+
+    @Delete('/:id')
+    public delete(@Param('id') id: number): Promise<void> {
+        return this.organizationService.delete(id);
     }
 }

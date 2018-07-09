@@ -2,7 +2,7 @@ import {
     Authorized, Body, CurrentUser, Delete, Get, JsonController, OnUndefined, Param, Post, Put
 } from 'routing-controllers';
 
-import { UserNotFoundError } from '../errors/UserNotFoundError';
+import { RecordNotFoundError } from '../errors/RecordNotFoundError';
 import { User } from '../models/User';
 import { UserService } from '../services/UserService';
 
@@ -20,8 +20,8 @@ export class UserController {
     }
 
     @Get('/:id')
-    @OnUndefined(UserNotFoundError)
-    public one(@Param('id') id: number): Promise<User | undefined> {
+    @OnUndefined(RecordNotFoundError)
+    public findOne(@Param('id') id: number): Promise<User | undefined> {
         return this.userService.findOne(id);
     }
 
