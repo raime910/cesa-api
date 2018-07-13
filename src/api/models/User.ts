@@ -31,7 +31,7 @@ export class User {
     public pets: Pet[];
 
     @Column({ nullable: true })
-    public organizationId: string;
+    public organizationId: number;
 
     @OneToMany(type => LeagueStaff, leagueStaff => leagueStaff.user)
     public staffs: LeagueStaff[];

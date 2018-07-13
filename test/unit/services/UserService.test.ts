@@ -1,6 +1,7 @@
-import { User } from '../../../src/api/models/User';
-import { UserService } from '../../../src/api/services/UserService';
-import { events } from '../../../src/api/subscribers/events';
+import { User } from 'src/api/models/User';
+import { UserService } from 'src/api/services/UserService';
+import { events } from 'src/api/subscribers/events';
+
 import { EventDispatcherMock } from '../lib/EventDispatcherMock';
 import { LogMock } from '../lib/LogMock';
 import { RepositoryMock } from '../lib/RepositoryMock';
@@ -12,7 +13,7 @@ describe('UserService', () => {
         const repo = new RepositoryMock();
         const ed = new EventDispatcherMock();
         const user = new User();
-        user.id = '1';
+        user.id = 1;
         user.firstName = 'John';
         user.lastName = 'Doe';
         user.email = 'john.doe@test.com';
@@ -28,7 +29,7 @@ describe('UserService', () => {
         const repo = new RepositoryMock();
         const ed = new EventDispatcherMock();
         const user = new User();
-        user.id = '1';
+        user.id = 1;
         user.firstName = 'John';
         user.lastName = 'Doe';
         user.email = 'john.doe@test.com';
